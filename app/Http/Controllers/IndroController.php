@@ -37,9 +37,8 @@ class IndroController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $images = Image::read($image);
             // Resize image
-            $images->resize(1100, 733, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/indro/' . $filename);
+            $images->resize(1500, 470)->save('images/indro/' . $filename);
+            $images->resize(1067, 800)->save('images/indro/sm_image/' . $filename);
             $indro->image = $filename;
             $indro->save();
         }
@@ -69,14 +68,18 @@ class IndroController extends Controller
             File::delete($image_path);
             }
 
+            $image_path = "images/indro/sm_image/".$indro->image;
+            if(File::exists($image_path)) {
+            File::delete($image_path);
+            }
+
             // save image
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $images = Image::read($image);
             // Resize image
-            $images->resize(1100, 733, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/indro/' . $filename);
+            $images->resize(1500, 470)->save('images/indro/' . $filename);
+            $images->resize(1067, 800)->save('images/indro/sm_image/'. $filename);
             $indro->image = $filename;
             $indro->save();
         }
@@ -91,6 +94,11 @@ class IndroController extends Controller
         if(File::exists($image_path)) {
             File::delete($image_path);
         }
+
+        $image_path = "images/indro/sm_image/".$indro->image;
+            if(File::exists($image_path)) {
+            File::delete($image_path);
+            }
 
         $indro->delete();
         Alert::success('Success Title', 'Success Message');

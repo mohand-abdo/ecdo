@@ -26,7 +26,7 @@ class UpdateStoryRequest extends FormRequest
             'title' =>[ 'required',Rule::unique('stories','title')->ignore($this->story->id,'id')],
             'body' => 'required',
             'section_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp'
+            'image' => 'file|mimes:jpg,jpeg,png,mp4,mov,avi|max:20480'
         ];
     }
 }

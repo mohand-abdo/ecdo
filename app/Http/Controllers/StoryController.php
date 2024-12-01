@@ -39,14 +39,7 @@ class StoryController extends Controller
 
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $images = Image::read($image);
-            // Resize image
-            $images->resize(240, 240, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/story/' . $filename);
-            $images->resize(1500, 937.5, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save('images/story/big_image/'.$filename);
+            $request->file('image')->move('images/story/',$filename);
             $story->image = $filename;
             $story->save();
         }
@@ -75,25 +68,14 @@ class StoryController extends Controller
         {
             // delete image
             $image_path = "images/story/".$story->image;
-            $image_path2 = "images/story/big_image/".$story->image;
             if(File::exists($image_path)) {
             File::delete($image_path);
-            }
-            if(File::exists($image_path2)) {
-            File::delete($image_path2);
             }
 
             // save image
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $images = Image::read($image);
-            // Resize image
-            $images->resize(240, 240, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/story/' . $filename);
-            $images->resize(1500, 937.5, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/story/big_image/'.$filename);
+            $request->file('image')->move('images/story/',$filename);
             $story->image = $filename;
             $story->save();
         }
@@ -105,13 +87,9 @@ class StoryController extends Controller
     public function destroy(Story $story)
     {
         $image_path = "images/story/".$story->image;
-        $image_path2 = "images/story/big_image/".$story->image;
 
         if(File::exists($image_path)) {
             File::delete($image_path);
-        }
-        if(File::exists($image_path2)) {
-            File::delete($image_path2);
         }
 
         $story->delete();

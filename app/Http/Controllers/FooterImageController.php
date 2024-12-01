@@ -35,9 +35,8 @@ class FooterImageController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $images = Image::read($image);
             // Resize image
-            $images->resize(1375, 892, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/footer_image/' . $filename);
+            $images->resize(1500, 740)->save('images/footer_image/' . $filename);
+            $images->resize(1067, 800)->save('images/footer_image/sm_image/' . $filename);
             $footer_image->image = $filename;
             $footer_image->save();
         }
@@ -67,14 +66,19 @@ class FooterImageController extends Controller
             File::delete($image_path);
             }
 
+            // delete image
+            $image_path = "images/footer_image/sm_iamge/".$footer_image->image;
+            if(File::exists($image_path)) {
+            File::delete($image_path);
+            }
+
             // save image
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $images = Image::read($image);
             // Resize image
-            $images->resize(1375, 892, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('images/footer_image/' . $filename);
+            $images->resize(1375, 892)->save('images/footer_image/' . $filename);
+            $images->resize(1067, 800)->save('images/footer_image/sm_image/'. $filename);
             $footer_image->image = $filename;
             $footer_image->save();
         }
@@ -86,6 +90,11 @@ class FooterImageController extends Controller
     public function destroy(FooterImage $footer_image)
     {
         $image_path = "images/footer_image/".$footer_image->image;
+        if(File::exists($image_path)) {
+            File::delete($image_path);
+        }
+
+        $image_path = "images/footer_image/sm_image/".$footer_image->image;
         if(File::exists($image_path)) {
             File::delete($image_path);
         }

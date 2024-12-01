@@ -84,7 +84,8 @@ class WelcomeController extends Controller
     {
         $stories = $section->stories->shuffle();
         $story_php = $stories->first();
-        return view('website.pages.story_section',compact('section','stories','story_php'));
+        $footer_image = FooterImage::latest()->first();
+        return view('website.pages.story_section',compact('section','stories','story_php','footer_image'));
     }
 
     public function our_impact()

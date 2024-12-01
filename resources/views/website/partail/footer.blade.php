@@ -2,11 +2,11 @@
 <footer class="footer" role="contentinfo">
   <style>
     .footer #pie circle:first-of-type {
-      stroke: #F4B223;
+      stroke: #2ecc71;
     }
 
     .footer #pie circle:last-of-type {
-      stroke: #E36F1E;
+      stroke: #2ecc71;
     }
   </style>
 
@@ -105,8 +105,8 @@
       <div class="footer__stat">
         <div class="footer__stat-pie footer-pie" data-pct="0" data-target-pct="90%">
           <svg viewBox="0 0 95 95" id="pie">
-            <circle cx="47.5" cy="47.5" r="43.25" fill="none" stroke="#F4B223" />
-            <circle cx="47.5" cy="47.5" r="43.25" fill="none" stroke="#E36F1E" stroke-dasharray="0 271.748"/>
+            <circle cx="47.5" cy="47.5" r="43.25" fill="none" stroke="#2ecc71" />
+            <circle cx="47.5" cy="47.5" r="43.25" fill="none" stroke="#2ecc71" stroke-dasharray="0 271.748"/>
           </svg>    </div>
 
           <div class="footer__stat-description">

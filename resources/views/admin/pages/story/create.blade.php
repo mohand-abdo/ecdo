@@ -2,6 +2,26 @@
 
 @section('title',__('site.stories'))
 
+@push('style')
+    <style>
+        #preview {
+            width: 150px;
+            height: 150px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #preview video,
+        #preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+@endpush
+
 @section('content')
 
     <div class="content-wrapper">
@@ -57,11 +77,12 @@
                          </div>
 
                          <div class="form-group">
-                            <label for="image">@lang('site.image')</label>
+                            <label for="image">Image Or Video</label>
                             <div class="input-group">
-                                <input type="file" name="image" class="form-control {{ $errors->has('image') ? 'has-error is-invalid' : '' }}" id="imgInp" >
-
-                                <img id="blah" src="{{ asset('images/default.jpg') }}" alt="no image" width="150" height="150" />
+                                <input type="file" name="image" class="form-control {{ $errors->has('image') ? 'has-error is-invalid' : '' }}" id="file"  accept="image/*,video/*" >
+                                <div id="preview">
+                                    <img id="currentMedia" src="{{ asset('images/default.jpg') }}" alt="no image" width="150" height="150" />
+                                </div>
                                 @error('image')
                                     <span class="error invalid-feedback" style="color:red;">{{$message}}</span>
                                 @enderror
@@ -86,16 +107,26 @@
 
 @push('script')
     <script>
-        $(document).ready(function () {
-            imgInp.onchange = evt => {
-                const [file] = imgInp.files
-                if (file) {
-                    blah.src = URL.createObjectURL(file)
-                }
+        const fileInput = document.getElementById('file');
+        const preview = document.getElementById('preview');
+        const uploadForm = document.getElementById('uploadForm');
+        const currentMedia = document.getElementById('currentMedia');
+
+        // عرض معاينة الملف المرفوع
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const fileURL = URL.createObjectURL(file);
+
+            // تحديث المعاينة
+            if (file.type.startsWith('video/')) {
+                preview.innerHTML = `<video controls><source src="${fileURL}" type="${file.type}" width="150" height="150"></video>`;
+            } else if (file.type.startsWith('image/')) {
+                preview.innerHTML = `<img src="${fileURL}" alt="المعاينة" width="150" height="150">`;
+            } else {
+                alert('الرجاء اختيار صورة أو فيديو فقط.');
             }
-
-
         });
-
     </script>
 @endpush

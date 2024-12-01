@@ -5,13 +5,13 @@
 @push('style')
     <style>
         .sb-cta .button--primary {
-            background: #E36F1E !important;
+            background: #2ecc71 !important;
             color: #fff !important;
         }
 
         .body-text__content ul li::before {
-            background: #E36F1E;
-            border-color: #E36F1E;
+            background: #2ecc71;
+            border-color: #2ecc71;
         }
 
         .body-text__content ol a, .body-text__content p a, .body-text__content ul a{

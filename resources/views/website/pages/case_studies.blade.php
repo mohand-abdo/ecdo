@@ -5,7 +5,7 @@
 @push('style')
     <style>
         .button--primary::after{
-            background:#F4B223;
+            background:#2ecc71;
         }
         .button--primary:hover span,
         .button--primary:hover svg{
@@ -13,28 +13,28 @@
         }
 
         .button--secondary {
-            border-color:#E36F1E
+            border-color:#2ecc71
         }
         .button--secondary:hover{
-            background:#E36F1E;
-            border-color:#E36F1E;
+            background:#2ecc71;
+            border-color:#2ecc71;
         }
         a.button--secondary:hover {
-            background:#E36F1E;
-            border-color:#E36F1E;
+            background:#2ecc71;
+            border-color:#2ecc71;
         }
 
         a.button--secondary {
-            border-color: #E36F1E
+            border-color: #2ecc71
         }
 
         .body-text__content ul li::before {
-            background: #E36F1E;
-            border-color: #E36F1E;
+            background: #2ecc71;
+            border-color: #2ecc71;
         }
 
         .sb-cta .button--primary {
-            background: #E36F1E !important;
+            background: #2ecc71 !important;
             color: #fff !important;
         }
 

@@ -5,7 +5,7 @@
 @push('style')
     <style>
         .button--primary::after{
-            background:#F4B223;
+            background:#2ecc71;
         }
         .button--primary:hover span,
         .button--primary:hover svg{
@@ -13,28 +13,28 @@
         }
 
         .button--secondary {
-            border-color:#E36F1E
+            border-color:#2ecc71
         }
         .button--secondary:hover{
-            background:#E36F1E;
-            border-color:#E36F1E;
+            background:#2ecc71;
+            border-color:#2ecc71;
         }
         a.button--secondary:hover {
-            background:#E36F1E;
-            border-color:#E36F1E;
+            background:#2ecc71;
+            border-color:#2ecc71;
         }
 
         a.button--secondary {
-            border-color: #E36F1E
+            border-color: #2ecc71
         }
 
         .body-text__content ul li::before {
-            background: #E36F1E;
-            border-color: #E36F1E;
+            background: #2ecc71;
+            border-color: #2ecc71;
         }
 
         .sb-cta .button--primary {
-            background: #E36F1E !important;
+            background: #2ecc71 !important;
             color: #fff !important;
         }
 
@@ -49,11 +49,19 @@
         }
 
         .select2-container--default .select2-results__option--highlighted, .select2-container--default .select2-results__option--selected{
-            background: #eb4d4b;
+            background: #2ecc71;
         }
 
         .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{
-            background: #eb4d4b;
+            background: #2ecc71;
+        }
+
+        .post-teaser h6:hover{
+            color: #2ecc71
+        }
+
+        .post-teaser__image::before {
+            padding-top: 0
         }
 
     </style>
@@ -103,8 +111,16 @@
                 <div class="category-archive__list-one-posts container--large">
                     @foreach($stories as $story)
                         <article class="post-teaser">
-                            <div class="post-teaser__image"
-                                 style="background-image:url({{ asset('images/story/'.$story->image) }})">
+                            <div class="post-teaser__image">
+                                @if (strpos($story->image, '.mp4') !== false ||
+                                        strpos($story->image, '.mov') !== false ||
+                                        strpos($story->image, '.avi') !== false)
+                                    <video id="currentMedia" src="{{ asset('images/story/' . $story->image) }}" controls
+                                        style="max-width: 100%; max-height: 100%"></video>
+                                @else
+                                    <img id="currentMedia" src="{{ asset('images/story/' . $story->image) }}"
+                                        alt="{{ $story->title }}" style="max-width: 100%; max-height: 100%">
+                                @endif
                             </div>
 
                             <div class="post-teaser__content">

@@ -25,7 +25,7 @@ class StoreStoryRequest extends FormRequest
             'title' => 'required|unique:stories,title',
             'body' => 'required',
             'section_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp'
+            'image' => 'required|file|mimes:jpg,jpeg,png,mp4,mov,avi|max:20480'
         ];
     }
 }
